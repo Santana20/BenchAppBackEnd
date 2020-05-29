@@ -1,44 +1,45 @@
 package pe.upc.bench.entidades;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
+import java.util.Date;
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 
 @Entity
 @Table(name ="PEDIDO")
-public class Pedido implements Serializable {
+
+public class Pedido  {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="ID_PEDIDO")
 	private Long codigo;
 	private String direccion;
+	@Temporal(TemporalType.DATE)
 	private Date fecha;
 	private double costo_total;
 	
 	
 	@ManyToOne
 	@JoinColumn(name ="ID_CLIENTE")
-	@JsonIgnore
+	
 	private Cliente cliente;
 	
 	
-	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Pedido_Producto> pedido_producto;
+	
 	
 	
 	
@@ -71,12 +72,7 @@ public class Pedido implements Serializable {
 		this.fecha = fecha;
 	}
 	
-	public List<Pedido_Producto> getPedido_producto() {
-		return pedido_producto;
-	}
-	public void setPedido_producto(List<Pedido_Producto> pedido_producto) {
-		this.pedido_producto = pedido_producto;
-	}
+	
 	public void setCosto_total(double costo_total) {
 		this.costo_total = costo_total;
 	}

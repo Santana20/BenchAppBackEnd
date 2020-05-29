@@ -12,7 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
+
 
 @Entity
 @Table(name ="PEDIDO_PRODUCTO")
@@ -28,14 +30,14 @@ public class Pedido_Producto implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="ID_PRODUCTO")
-	@JsonIgnore
+	
 	private Producto producto;
 	
 	
 	
 	@ManyToOne
 	@JoinColumn(name="ID_PEDIDO")
-	@JsonIgnore
+	
 	private Pedido pedido;
 
 

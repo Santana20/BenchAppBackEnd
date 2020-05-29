@@ -56,7 +56,7 @@ public class ServicioProducto {
 	//ELIMINAR UN PRODUCTO
 	public Producto eliminarProducto(Long codigo) throws Exception {
 		Producto p;
-		p=obtenerProducto(codigo);
+		p=repositorioProducto.buscarProducto(codigo);
 		if(p.getCodigo()!=null) {
 			repositorioProducto.delete(p);
 		}else {

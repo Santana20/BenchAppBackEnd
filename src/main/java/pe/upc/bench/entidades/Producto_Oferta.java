@@ -1,8 +1,8 @@
 package pe.upc.bench.entidades;
 
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -22,21 +22,23 @@ public class Producto_Oferta implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="ID_PRODUCTO_OFERTA")
 	private Long codigo;
+	@Temporal(TemporalType.DATE)
 	private Date fecha_inicio;
+	@Temporal(TemporalType.DATE)
 	private Date fecha_fin;
 	private double descuento;
 	private double total;
 	
 	@ManyToOne
 	@JoinColumn(name="ID_PRODUCTO")
-	@JsonIgnore
+	
 	private Producto producto;
 	
 	
 	
 	@ManyToOne
 	@JoinColumn(name="ID_OFERTA")
-	@JsonIgnore
+
 	private Oferta oferta;
 
 

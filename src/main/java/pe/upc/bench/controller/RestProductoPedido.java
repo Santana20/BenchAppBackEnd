@@ -23,11 +23,11 @@ public class RestProductoPedido {
 	private ServicioProductoPedido servicioproductopedido;
 	
 	//REGISTRAR PEDIDO PRODUCTO
-	@PostMapping("/RegistrarPP/{codigo}/{codigo2}")
-	public Pedido_Producto registrarPedidoProducto(@PathVariable(value = "codigo") Long codigo,@PathVariable(value = "codigo2") Long codigo2,@RequestBody Pedido_Producto pedido_Producto) {
+	@PostMapping("/RegistrarPP/{codigo}")
+	public Pedido_Producto registrarPedidoProducto(@PathVariable(value = "codigo") Long codigo,@RequestBody Pedido_Producto pedido_Producto) {
 		Pedido_Producto pp;
 		try {
-			pp=servicioproductopedido.registrarPedidoProducto(codigo, codigo2, pedido_Producto);
+			pp=servicioproductopedido.registrarPedidoProducto(codigo, pedido_Producto);
 		}catch(Exception e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
 		}
@@ -37,6 +37,25 @@ public class RestProductoPedido {
 	//MOSTRAR PEDIDOS
 	@GetMapping("/pedidosProductos")
 	public List<Pedido_Producto> listaPedidos(){
-		return servicioproductopedido.mostrarLista();
+		List<Pedido_Producto> pp;
+		try {
+			pp=servicioproductopedido.mostrarLista();
+		}catch(Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No se encontraron Detalles Pedidos");
+		}
+		return pp;
+	}
+	
+	//OBTENER DETALLE PEDIDO
+	@GetMapping("/otenerPedidoProducto/{codigo}")
+	public List<Pedido_Producto> obtenerPeddidoPro(@PathVariable(value = "codigo")Long codigo) {
+		List<Pedido_Producto> pp;
+		try {
+			pp=servicioproductopedido.obtenerPP(codigo);
+		}catch(Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+		}
+		return pp;
+		
 	}
 }

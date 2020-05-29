@@ -27,22 +27,30 @@ public class ServicioProductoPedido {
 	
 	//REGISTRAR PEDIDO PRODUCTO
 	@Transactional(rollbackFor = Exception.class)
-	public Pedido_Producto registrarPedidoProducto(Long codigo,Long codigo2,Pedido_Producto pedido_Producto) throws Exception {
+	public Pedido_Producto registrarPedidoProducto(Long codigo,Pedido_Producto pedido_Producto) throws Exception {
 		Pedido p;
 		p=repositoriopedido.buscarPedido(codigo);
 		if (p==null)throw new Exception("pedido no encontrado");
 	    pedido_Producto.setPedido(p);
 	    
-	    Producto producto;
-	    producto=repositorioproducto.buscarProducto(codigo2);
-		if(producto==null)throw new Exception("producto no encontrado");
+	   
 	    
-	    pedido_Producto.setProducto(producto);
+	    
 	    return repositorioPedidoProducto.save(pedido_Producto);
 	}
 	//MOSTRAR LISTA
 	public List<Pedido_Producto> mostrarLista() {
 		return repositorioPedidoProducto.findAll();
+	}
+	
+	
+	
+	//OBTENER LISTA POR PEDIDOS DE UN CLIENTE
+	public List<Pedido_Producto> obtenerPP(Long codigo) throws Exception {
+		List<Pedido_Producto> p=null;
+		p=repositorioPedidoProducto.obtenerPP(codigo);
+		if(p==null)throw new Exception("pedido producto no encontrado");
+		return p;
 	}
 	
 }

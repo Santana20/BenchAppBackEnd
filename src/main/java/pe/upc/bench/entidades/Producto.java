@@ -17,6 +17,10 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
+
+
+
 @Entity
 @Table(name ="PRODUCTO")
 public class Producto implements Serializable {
@@ -30,15 +34,14 @@ public class Producto implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="ID_PIZZERIA")
-	@JsonIgnore
+	
 	private Pizzeria pizzeria;
 	
-	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Pedido_Producto> pedido_producto;
+	@JsonIgnore
+	@OneToMany(mappedBy = "producto",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	private List<Pedido_Producto> productos;
 	
 	
-	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Producto_Oferta> producto_oferta;
 	
 	
 	public Long getCodigo() {
@@ -65,24 +68,20 @@ public class Producto implements Serializable {
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
-	public List<Pedido_Producto> getPedido_producto() {
-		return pedido_producto;
-	}
-	public void setPedido_producto(List<Pedido_Producto> pedido_producto) {
-		this.pedido_producto = pedido_producto;
-	}
+	
 	public Pizzeria getPizzeria() {
 		return pizzeria;
 	}
 	public void setPizzeria(Pizzeria pizzeria) {
 		this.pizzeria = pizzeria;
 	}
-	public List<Producto_Oferta> getProducto_oferta() {
-		return producto_oferta;
+	public List<Pedido_Producto> getProductos() {
+		return productos;
 	}
-	public void setProducto_oferta(List<Producto_Oferta> producto_oferta) {
-		this.producto_oferta = producto_oferta;
+	public void setProductos(List<Pedido_Producto> productos) {
+		this.productos = productos;
 	}
+	
 	
 	
 	

@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pe.upc.bench.entidades.Cliente;
 import pe.upc.bench.entidades.Pedido;
-import pe.upc.bench.entidades.Pedido_Producto;
 import pe.upc.bench.repositorios.RepositorioCliente;
 import pe.upc.bench.repositorios.RepositorioPedido;
 
@@ -55,13 +54,7 @@ public class ServicioPedido {
 		return pedidos;
 	}
 	
-	//DETALLE DE PEDIDO_PRODUCTO POR PEDIDO
-	public List<Pedido_Producto> detallePedidos(Long codigo) throws Exception{
-		Pedido pedido=null;
-		pedido=repositorioPedido.buscarPedido(codigo);
-		if(pedido==null) throw new Exception("pedidos no encontrados");
-		return pedido.getPedido_producto();
-	}
 	
+
 	
 }

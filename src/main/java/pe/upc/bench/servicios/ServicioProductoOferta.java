@@ -1,7 +1,6 @@
 package pe.upc.bench.servicios;
 
 import java.util.Date;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.util.List;
@@ -44,7 +43,7 @@ public class ServicioProductoOferta {
 	
 	
 	
-	//buscar rango fechas
+	//BUSCAR RANGO FECHAS
 	public List<Producto_Oferta> buscarRangoFecha(String fecha,String fechafin) throws Exception{
 		SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd");
 		Date fechaini=formatter.parse(fecha);
@@ -56,7 +55,7 @@ public class ServicioProductoOferta {
 	}
 	
 	
-	//eliminar producto oferta
+	//ELIMINAR PRODUCTO OFERTA
 	public Producto_Oferta eliminar(Long codigo) throws Exception {
 		Producto_Oferta po;
 		po=repositorioProductoOferta.buscarProductoOferta(codigo);

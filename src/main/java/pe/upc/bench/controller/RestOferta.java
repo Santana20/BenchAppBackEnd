@@ -92,7 +92,7 @@ public class RestOferta {
 			ofertas=serviciooferta.mostrarLista();
 		} catch (Exception e) {
 			
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No se encontraron Ofertas");
 		}
 		return ofertas;
 	}

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pe.upc.bench.entidades.Cliente;
-import pe.upc.bench.entidades.Pedido;
 import pe.upc.bench.repositorios.RepositorioCliente;
 
 @Service
@@ -34,11 +33,6 @@ public class ServicioCliente {
 			}
 		}
 		
-		//OBTENER  PEDIDOS DE UN SOLO CLIENTE
-		public List<Pedido> obtenerPedidosCliente(String dni) throws Exception{
-			Cliente cliente=obtenerCliente(dni);
-			return cliente.getPedidos();
-		}
 		
 		
 		

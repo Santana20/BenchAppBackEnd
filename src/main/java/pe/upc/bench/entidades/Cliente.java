@@ -1,5 +1,6 @@
 package pe.upc.bench.entidades;
 
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,9 +14,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
+
+
 @Entity
 @Table(name ="CLIENTE")
-public class Cliente implements Serializable {
+public class Cliente implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +32,7 @@ public class Cliente implements Serializable {
 	private String password;
 	private String telefono;
 	
-	@OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private List<Pedido> pedidos;
+	
 	
 	@OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Review> reviews;
@@ -65,12 +68,7 @@ public class Cliente implements Serializable {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	public List<Pedido> getPedidos() {
-		return pedidos;
-	}
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
+	
 	public String getPassword() {
 		return password;
 	}

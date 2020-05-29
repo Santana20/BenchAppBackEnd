@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import pe.upc.bench.entidades.Cliente;
-import pe.upc.bench.entidades.Pedido;
 import pe.upc.bench.servicios.ServicioCliente;
 
 @RestController
@@ -53,7 +52,14 @@ public class RestCliente {
 	//OBTENER LISTA CLIENTES
 	@GetMapping("/clientes")
 	public List<Cliente> obtenerClientes(){
-		return serviciocliente.obtenerClientes();
+		List<Cliente> c;
+		try {
+			c=serviciocliente.obtenerClientes();
+		} catch (Exception e) {
+			
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No se encontraron Clientes");
+		}
+		return c;
 	}
 	
 	
@@ -91,16 +97,6 @@ public class RestCliente {
 		}
 		return client;
 	}
-	//BUSCAR PEDIDOS DE UN CLIENTE
-	@GetMapping("/pedidosCliente/{dni}")
-	public List<Pedido> listaPedidoCliente(@PathVariable(value = "dni") String dni){
-		List<Pedido> pedidos =null;
-		try {
-			pedidos=serviciocliente.obtenerPedidosCliente(dni);
-		}catch(Exception e) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"no se encontro Pedidos");
-		}
-		return pedidos;
-	}
+	
 	
 }

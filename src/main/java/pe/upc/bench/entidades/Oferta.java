@@ -17,6 +17,10 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
+
+
+
 @Entity
 @Table(name ="OFERTA")
 public class Oferta implements Serializable {
@@ -29,11 +33,14 @@ public class Oferta implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name ="ID_PIZZERIA")
-	@JsonIgnore
+	
 	private Pizzeria pizzeria;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "oferta",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	private List<Producto_Oferta> productoofertas;
 
-	@OneToMany(mappedBy = "oferta", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Producto_Oferta> producto_oferta;
+	
 	
 	public Long getCodigo() {
 		return codigo;
@@ -65,6 +72,14 @@ public class Oferta implements Serializable {
 
 	public void setPizzeria(Pizzeria pizzeria) {
 		this.pizzeria = pizzeria;
+	}
+
+	public List<Producto_Oferta> getProductoofertas() {
+		return productoofertas;
+	}
+
+	public void setProductoofertas(List<Producto_Oferta> productoofertas) {
+		this.productoofertas = productoofertas;
 	}
 	
 	

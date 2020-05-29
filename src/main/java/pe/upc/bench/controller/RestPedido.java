@@ -52,7 +52,13 @@ public class RestPedido {
 	//OBTENER TODOS LOS PEDIDOS
 	@GetMapping("/pedidos")
 	public List<Pedido> listaPedidos(){
-		return serviciopedido.obtenerPedidos();
+		List<Pedido> pedidos=null;
+		try {
+			pedidos=serviciopedido.obtenerPedidos();
+		}catch(Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No se encontraron Pedidos");
+		}
+		return pedidos;
 	}
 	
 	
@@ -69,15 +75,5 @@ public class RestPedido {
 	}
 	
 	
-	//DETALLE DE PEDIDO_PRODUCTO POR PEDIDO
-	@GetMapping("/detallePedido/{codigo}")
-	public List<Pedido_Producto> BuscarDetallePedido(@PathVariable(value = "codigo") Long codigo){
-		List<Pedido_Producto> pedidoProducto=null;
-		try {
-			pedidoProducto=serviciopedido.detallePedidos(codigo);
-		}catch(Exception e) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"no sale detalle");
-		}
-		return pedidoProducto;
-	}
+	
 }

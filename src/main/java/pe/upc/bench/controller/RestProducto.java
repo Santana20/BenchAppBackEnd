@@ -63,7 +63,13 @@ public class RestProducto {
 	//MOSTRAR PRODUCTOS
 	@GetMapping("/mostrarProductos")
 	public List<Producto> mostrarProductos(){
-		return servicioproducto.mostrarProductos();
+		List<Producto> productos;
+		try {
+			productos=servicioproducto.mostrarProductos();
+		}catch(Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No se encontraron Productos");
+		}
+		return productos;
 	}
 	
 	//BUSCAR POR NOMBRE PRODUCTOS

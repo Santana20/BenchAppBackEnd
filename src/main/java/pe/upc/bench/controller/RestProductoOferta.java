@@ -39,7 +39,13 @@ public class RestProductoOferta {
 	//MOSTRAR LISTA
 	@GetMapping("/mostrarProductoOferta")
 	public List<Producto_Oferta> mostrarLista(){
-		return servicioproductooferta.mostrarLista();
+		List<Producto_Oferta> po;
+		try {
+			po=servicioproductooferta.mostrarLista();
+		}catch(Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No se encontraron Promociones");
+		}
+		return po;
 	}
 	
 
