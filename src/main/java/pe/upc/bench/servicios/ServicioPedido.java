@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pe.upc.bench.entidades.Cliente;
 import pe.upc.bench.entidades.Pedido;
+import pe.upc.bench.entidades.Pedido_Producto;
 import pe.upc.bench.repositorios.RepositorioCliente;
 import pe.upc.bench.repositorios.RepositorioPedido;
 
@@ -27,7 +28,10 @@ public class ServicioPedido {
 		Cliente c = null;
 		c=repositorioCliente.buscarCliente(dni);
 		if(c==null) throw new Exception("entidad no encontrada");
-		
+		for(Pedido_Producto aux : pedido.getProductos())
+		{
+			aux.setPedido(pedido);
+		}
 		pedido.setCliente(c);
 		return repositorioPedido.save(pedido);			
 	}

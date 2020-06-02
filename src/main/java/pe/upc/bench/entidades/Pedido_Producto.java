@@ -40,6 +40,7 @@ public class Pedido_Producto implements Serializable {
 	
 	private Pedido pedido;
 
+	
 
 	public Long getCodigo() {
 		return codigo;
