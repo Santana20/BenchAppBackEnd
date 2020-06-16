@@ -32,6 +32,8 @@ public class Producto implements Serializable {
 	private String descripcion;
 	private double precio;
 	
+	private String imagen;
+	
 	@ManyToOne
 	@JoinColumn(name="ID_PIZZERIA")
 	
@@ -80,6 +82,12 @@ public class Producto implements Serializable {
 	}
 	public void setProductos(List<Pedido_Producto> productos) {
 		this.productos = productos;
+	}
+	public String getImagen() {
+		return imagen;
+	}
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 	
 	
