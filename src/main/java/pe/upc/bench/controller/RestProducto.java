@@ -123,6 +123,58 @@ public class RestProducto {
 		return productos;
 	}
 	
+	@GetMapping("/buscarProducto/{codigo}")
+	public Producto buscarProductoC(@PathVariable(value="codigo")Long codigo) {
+		Producto p;
+		
+		try {
+			p=servicioproducto.obtenerProducto(codigo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+		}
+		
+		return p;
+	}
+	
+	
+	//Subir Imagen para el create
+		@PostMapping("/producto/uploadC")
+		public ResponseEntity<?> uploadCreate(@RequestParam("archivo") MultipartFile archivo, @RequestParam("producto") Producto producto){
+			Map<String, Object> response=new HashMap<>();
+			
+			if(!archivo.isEmpty()) {
+				String nombreArch=UUID.randomUUID().toString()+"_"+ archivo.getOriginalFilename().replace(" ", "");
+				Path ruta=Paths.get("uploads").resolve(nombreArch).toAbsolutePath();
+				try {
+					Files.copy(archivo.getInputStream(), ruta);
+				} catch (IOException e) {
+					response.put("mensaje", "Error al subir la imagen"+nombreArch);
+					response.put("error", e.getMessage().concat(": ").concat(e.getCause().getMessage()));
+					return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+				}
+				
+				//Borrar imagen anterior si existe
+				String nomAnterior=producto.getImagen();
+				
+				if(nomAnterior != null && nomAnterior.length() > 0) {
+					Path rutaImgAnt = Paths.get("uploads").resolve(nomAnterior).toAbsolutePath();
+					File archImgAnt = rutaImgAnt.toFile();
+					if (archImgAnt.exists() && archImgAnt.canRead()) {
+						archImgAnt.delete();
+					}
+				}
+				
+				producto.setImagen(nombreArch);
+				
+				
+				response.put("producto", producto);
+				response.put("mensaje", "Se subio correctamente el archivo");
+			}
+			
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+		}
+	
 	//Subir Imagen
 	@PostMapping("/producto/upload")
 	public ResponseEntity<?> upload(@RequestParam("archivo") MultipartFile archivo, @RequestParam("id") Long id){
@@ -159,7 +211,7 @@ public class RestProducto {
 			producto.setImagen(nombreArch);
 			
 			try {
-				servicioproducto.registrarProducto(id, producto);
+				servicioproducto.actualizarProducto(id, producto);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND,"no se puede registrar producto");

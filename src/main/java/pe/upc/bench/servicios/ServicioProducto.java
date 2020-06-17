@@ -26,6 +26,9 @@ public class ServicioProducto {
 	public Producto registrarProducto(Long codigo,Producto producto) throws Exception {
 		Pizzeria pizzeria=repositorioPizzeria.obtenerPizzeria(codigo);
 		producto.setPizzeria(pizzeria);
+		
+		
+		
 		return repositorioProducto.save(producto);
 	}
 	
@@ -48,6 +51,12 @@ public class ServicioProducto {
 		}
 		if(producto.getPrecio()!=0) {
 			p.setPrecio(producto.getPrecio());
+		}
+		if(producto.getImagen()!=null) {
+			p.setImagen(producto.getImagen());
+		}
+		if(producto.getPizzeria()!=null) {
+			p.setPizzeria(producto.getPizzeria());
 		}
 		
 		return repositorioProducto.save(p);
