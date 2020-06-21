@@ -1,5 +1,6 @@
 package pe.upc.bench.servicios;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -33,7 +34,27 @@ public class ServicioPedido {
 			aux.setPedido(pedido);
 		}
 		pedido.setCliente(c);
-		return repositorioPedido.save(pedido);			
+		return repositorioPedido.save(pedido);
+	}
+	
+	//ACTUALIZAR FECHARECEPCION DEL PEDIDO
+	public Pedido actualizarFechaRecepcion(Long codigo, Date fechaRecepcion) throws Exception
+	{
+		Pedido pedido = repositorioPedido.buscarPedido(codigo);
+		
+		if ( pedido != null )
+		{
+			pedido.setFecha_recepcion(fechaRecepcion);
+			pedido.setStatus(true);
+			repositorioPedido.save(pedido);
+		}
+		return pedido;
+	}
+	
+	//LISTAR PEDIDOS POR CLIENTE
+	public List<Pedido> listarPedidodeCliente(Long codigo) throws Exception
+	{
+		return (List<Pedido>) repositorioPedido.listarPedidosActivosdeCliente(codigo);
 	}
 	
 	//OBTENER PEDIDOS
@@ -49,7 +70,6 @@ public class ServicioPedido {
 		return p;
 	}
 	
-	
 	//BUSCAR RANGO PRECIOS
 	public List<Pedido> buscarRangoPrecios(double ini,double fin) throws Exception{
 		List<Pedido> pedidos;
@@ -57,8 +77,5 @@ public class ServicioPedido {
 		if(pedidos==null) throw new Exception("pedidos no encontrados");
 		return pedidos;
 	}
-	
-	
-
 	
 }

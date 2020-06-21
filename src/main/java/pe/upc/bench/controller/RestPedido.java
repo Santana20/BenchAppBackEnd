@@ -1,12 +1,15 @@
 package pe.upc.bench.controller;
 
+import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,6 +39,21 @@ public class RestPedido {
 		return p;
 	}
 	
+	//ACTUALIZAMOS FECHARECEPCIONP DEL PEDIDO
+	@PutMapping("/actualizarPedido/{codigo}")
+	public Pedido actualizarFechaRecepcion(@PathVariable(value="codigo")Long codigo, @RequestBody Date fechaRecepcion)
+	{
+		Pedido p = null;
+		try {
+			p=serviciopedido.actualizarFechaRecepcion(codigo, fechaRecepcion);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No es posible actualizar el Pedido");
+		}
+		
+		return p;
+	}
+	
 	//BUSCAR PEDIDO
 	@GetMapping("/pedido/{codigo}")
 	public Pedido obtenerPedido(@PathVariable(value = "codigo") Long codigo) {
@@ -47,6 +65,19 @@ public class RestPedido {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
 		}
 		return p;
+	}
+	
+	//LISTAR PEDIDOS POR CLIENTE
+	@GetMapping("/listarPedidosActivosdeCliente/{codigo}")
+	public List<Pedido> listarPedidosActivosdeCliente(@PathVariable(value="codigo") Long codigo)
+	{
+		List<Pedido> pedidos=null;
+		try {
+			pedidos=serviciopedido.listarPedidodeCliente(codigo);
+		}catch(Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No se encontraron Pedidos");
+		}
+		return pedidos;
 	}
 	
 	//OBTENER TODOS LOS PEDIDOS

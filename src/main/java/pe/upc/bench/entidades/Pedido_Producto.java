@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 
@@ -34,7 +36,7 @@ public class Pedido_Producto implements Serializable {
 	private Producto producto;
 	
 	
-	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="ID_PEDIDO")
 	

@@ -28,8 +28,11 @@ public class Pedido  {
 	@Column(name="ID_PEDIDO")
 	private Long codigo;
 	private String direccion;
-	@Temporal(TemporalType.DATE)
-	private Date fecha;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fecha_pedido;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fecha_recepcion;
+	private boolean status;
 	private double costo_total;
 	
 	
@@ -65,13 +68,6 @@ public class Pedido  {
 	public double getCosto_total() {
 		return costo_total;
 	}
-	public Date getFecha() {
-		return fecha;
-	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
-	
 	
 	public void setCosto_total(double costo_total) {
 		this.costo_total = costo_total;
@@ -81,6 +77,24 @@ public class Pedido  {
 	}
 	public void setProductos(List<Pedido_Producto> productos) {
 		this.productos = productos;
+	}
+	public Date getFecha_pedido() {
+		return fecha_pedido;
+	}
+	public void setFecha_pedido(Date fecha_pedido) {
+		this.fecha_pedido = fecha_pedido;
+	}
+	public Date getFecha_recepcion() {
+		return fecha_recepcion;
+	}
+	public void setFecha_recepcion(Date fecha_recepcion) {
+		this.fecha_recepcion = fecha_recepcion;
+	}
+	public boolean isStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 	
 }
