@@ -20,27 +20,26 @@ public class ServicioReview {
 	
 	
 	//REGISTRAR REVIEW
-	public Review registrarReview(Review review, Long codigoC) throws Exception{
-		Cliente c = repositoriocliente.findById(codigoC).orElseThrow(()->new Exception("No existe este cliente."));
-		review.setCliente(c);
+	public Review registrarReview(Review review) {
+
 		return repositorioreview.save(review);
 	}
 	
 	//ACTUALIZAR REVIEW 
-	public Review actualizarReview(Review review, Long codC,Long codigo)throws Exception {
-		Cliente c;
-		c = repositoriocliente.findById(codC).orElseThrow(()->new Exception("No existe este cliente."));
+	public Review actualizarReview(Review review,Long codigo) throws Exception{
+		
+		
 		Review r = repositorioreview.findById(codigo).orElseThrow(()->new Exception("No se puede actualizar"));
 		r.setDescripcion(review.getDescripcion());
-		r.setTitulo(review.getTitulo());
+		r.setNombre(review.getNombre());
 		return repositorioreview.save(r);
 	}
 	
 	//ELIMINAR REVIEW
-	public Review eliminarReview(Long codC,Long codigo) throws Exception {
+	public Review eliminarReview(Long codigo) throws Exception {
 		Review r;
-		Cliente c;
-		c = repositoriocliente.findById(codC).orElseThrow(()->new Exception("No existe este cliente."));
+		
+		
 		r = repositorioreview.findById(codigo).orElseThrow(()->new Exception("No existe la review"));
 		repositorioreview.delete(r);
 		return r;

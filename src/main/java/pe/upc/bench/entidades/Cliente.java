@@ -34,8 +34,7 @@ public class Cliente implements Serializable{
 	
 	
 	
-	@OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private List<Review> reviews;
+
 	
 	
 	public Long getCodigo() {
@@ -75,11 +74,6 @@ public class Cliente implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public List<Review> getReviews() {
-		return reviews;
-	}
-	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
-	}
+
 
 }

@@ -24,11 +24,11 @@ public class RestReview {
 	private ServicioReview servicioreview;
 	
 	//REGISTRAR REVIEW
-	@PostMapping("/registrarReview/{codC}")
-	public Review registrarReview(@RequestBody Review review, @PathVariable(value = "codC")Long codigoC) {
+	@PostMapping("/registrarReview/")
+	public Review registrarReview(@RequestBody Review review) {
 		Review r;
 		try {
-			r=servicioreview.registrarReview(review, codigoC);
+			r=servicioreview.registrarReview(review);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
@@ -37,11 +37,11 @@ public class RestReview {
 	}
 	
 	//ACTUALIZAR REVIEW
-	@PutMapping("/actualizarReview/{codC}/{codigo}")
-	public Review actualizarReview(@RequestBody Review review,@PathVariable(value = "codC") Long codC ,@PathVariable(value = "codigo") Long codigo) {
+	@PutMapping("/actualizarReview/{codigo}")
+	public Review actualizarReview(@RequestBody Review review,@PathVariable(value = "codigo") Long codigo) {
 		Review r;
 		try {
-			r=servicioreview.actualizarReview(review,codC ,codigo);
+			r=servicioreview.actualizarReview(review,codigo);
 		}catch(Exception e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
 		}
@@ -49,11 +49,11 @@ public class RestReview {
 	}
 	
 	//ELIMINAR REVIEW
-	@DeleteMapping("/borrarReview/{codC}/{codigo}")
-	public Review eliminarReview(@PathVariable(value = "codC")Long codC,@PathVariable(value = "codigo")Long codigo) {
+	@DeleteMapping("/borrarReview/{codigo}")
+	public Review eliminarReview(@PathVariable(value = "codigo")Long codigo) {
 		Review r = null;
 		try {
-			r=servicioreview.eliminarReview(codC, codigo);
+			r=servicioreview.eliminarReview(codigo);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
