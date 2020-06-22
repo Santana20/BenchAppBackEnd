@@ -23,7 +23,7 @@ public class RestReview {
 	@Autowired
 	private ServicioReview servicioreview;
 	
-	//REGISTRAR REVIEW
+	//REGISTRAR REVIEWwww
 	@PostMapping("/registrarReview")
 	public Review registrarReview(@RequestBody Review review) {
 		Review r;
@@ -36,7 +36,7 @@ public class RestReview {
 		return r;
 	}
 	
-	//ACTUALIZAR REVIEW
+	//ACTUALIZAR REVIEW 
 	@PutMapping("/actualizarReview/{codigo}")
 	public Review actualizarReview(@RequestBody Review review,@PathVariable(value = "codigo") Long codigo) {
 		Review r;
