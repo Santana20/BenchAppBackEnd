@@ -24,7 +24,7 @@ public class RestReview {
 	private ServicioReview servicioreview;
 	
 	//REGISTRAR REVIEW
-	@PostMapping("/registrarReview/")
+	@PostMapping("/registrarReview")
 	public Review registrarReview(@RequestBody Review review) {
 		Review r;
 		try {
