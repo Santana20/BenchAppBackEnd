@@ -22,4 +22,10 @@ public interface RepositorioPedido extends JpaRepository<Pedido, Long>{
 	
 	@Query("SELECT c FROM Pedido c WHERE c.cliente.codigo=:codigo and c.status=1")
 	List<Pedido> listarPedidosPasadosdeCliente(@Param("codigo") Long codigo);
+	
+	@Query("SELECT c FROM Pedido c WHERE c.status=0")
+	List<Pedido> listarPedidosActivos();
+	
+	@Query("SELECT c FROM Pedido c WHERE c.status=1")
+	List<Pedido> listarPedidosPasados();
 }

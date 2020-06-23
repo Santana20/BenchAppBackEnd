@@ -3,7 +3,6 @@ package pe.upc.bench.controller;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import pe.upc.bench.entidades.Pedido;
-import pe.upc.bench.entidades.Pedido_Producto;
 import pe.upc.bench.servicios.ServicioPedido;
 
 @RestController
@@ -67,18 +65,58 @@ public class RestPedido {
 		return p;
 	}
 	
-	//LISTAR PEDIDOS POR CLIENTE
+	//LISTAR PEDIDOS ACTIVOS POR CLIENTE
 	@GetMapping("/listarPedidosActivosdeCliente/{codigo}")
 	public List<Pedido> listarPedidosActivosdeCliente(@PathVariable(value="codigo") Long codigo)
 	{
 		List<Pedido> pedidos=null;
 		try {
-			pedidos=serviciopedido.listarPedidodeCliente(codigo);
+			pedidos=serviciopedido.listarPedidosActivosdeCliente(codigo);
 		}catch(Exception e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No se encontraron Pedidos");
 		}
 		return pedidos;
 	}
+	
+	//LISTAR PEDIDOS ANTIGUOS POR CLIENTE
+	@GetMapping("/listarPedidosPasadosdeCliente/{codigo}")
+	public List<Pedido> listarPedidosPasadosdeCliente(@PathVariable(value="codigo") Long codigo)
+	{
+		List<Pedido> pedidos=null;
+		try {
+			pedidos=serviciopedido.listarPedidosPasadosdeCliente(codigo);
+		}catch(Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No se encontraron Pedidos");
+		}
+		return pedidos;
+	}
+	
+	//LISTAR TODOS LOS PEDIDOS ACTIVOS
+	@GetMapping("/listarPedidosActivos")
+	public List<Pedido> listarPedidosActivos()
+	{
+		List<Pedido> pedidos=null;
+		try {
+			pedidos=serviciopedido.listarPedidosActivos();
+		}catch(Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No se encontraron Pedidos");
+		}
+		return pedidos;
+	}
+	
+	//LISTAR TODOS LOS PEDIDOS PASADOS
+	@GetMapping("/listarPedidosPasados")
+	public List<Pedido> listarPedidosPasados()
+	{
+		List<Pedido> pedidos=null;
+		try {
+			pedidos=serviciopedido.listarPedidosPasados();
+		}catch(Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No se encontraron Pedidos");
+		}
+		return pedidos;
+	}
+	
 	
 	//OBTENER TODOS LOS PEDIDOS
 	@GetMapping("/pedidos")

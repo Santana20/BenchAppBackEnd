@@ -51,11 +51,32 @@ public class ServicioPedido {
 		return pedido;
 	}
 	
-	//LISTAR PEDIDOS POR CLIENTE
-	public List<Pedido> listarPedidodeCliente(Long codigo) throws Exception
+	//LISTAR PEDIDOS ACTIVOS POR CLIENTE
+	public List<Pedido> listarPedidosActivosdeCliente(Long codigo) throws Exception
 	{
 		return (List<Pedido>) repositorioPedido.listarPedidosActivosdeCliente(codigo);
 	}
+	
+	//LISTAR PEDIDOS ANTIGUOS POR CLIENTE
+	public List<Pedido> listarPedidosPasadosdeCliente(Long codigo) throws Exception
+	{
+		return (List<Pedido>) repositorioPedido.listarPedidosPasadosdeCliente(codigo);
+	}
+	
+	
+	//LISTAR TODOS LOS PEDIDOS ACTIVOS
+	public List<Pedido> listarPedidosActivos() throws Exception
+	{
+		return (List<Pedido>) repositorioPedido.listarPedidosActivos();
+	}
+	
+	//LISTAR TODOS LOS PEDIDOS ACTIVOS
+	public List<Pedido> listarPedidosPasados() throws Exception
+	{
+		return (List<Pedido>) repositorioPedido.listarPedidosPasados();
+	}
+	
+	
 	
 	//OBTENER PEDIDOS
 	public List<Pedido> obtenerPedidos(){
