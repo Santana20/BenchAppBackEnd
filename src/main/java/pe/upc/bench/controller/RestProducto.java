@@ -18,6 +18,7 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,6 +41,7 @@ public class RestProducto {
 	private ServicioProducto servicioproducto;
 	
 	//REGISTRAR PRODUCTO
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/producto/{codigo}")
 	public Producto registrarProducto(@PathVariable(value = "codigo") Long codigo,@RequestBody Producto producto) {
 		Producto p;
@@ -52,6 +54,7 @@ public class RestProducto {
 	}
 	
 	//ACTUALIZAR PRODUCTO
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/actualizarProducto/{codigo}")
 	public Producto actualizarProducto(@PathVariable(value = "codigo") Long codigo,@RequestBody Producto producto) {
 		Producto p;
@@ -65,6 +68,7 @@ public class RestProducto {
 	
 	
 	//ELIMINAR PRODUCTO
+	@Secured("ROLE_ADMIN")
 	@DeleteMapping("/eliminarProducto/{codigo}")
 	public Producto eliminarProducto(@PathVariable(value = "codigo") Long codigo) {
 		Producto p;
@@ -88,6 +92,7 @@ public class RestProducto {
 	}
 	
 	//MOSTRAR PRODUCTOS
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@GetMapping("/mostrarProductos")
 	public List<Producto> mostrarProductos(){
 		List<Producto> productos;
@@ -100,6 +105,7 @@ public class RestProducto {
 	}
 	
 	//BUSCAR POR NOMBRE PRODUCTOS
+	
 	@GetMapping("/buscarNombreProducto/{nombre}")
 	public List<Producto> buscarNombreProducto(@PathVariable(value = "nombre") String nombre){
 		List<Producto> productos;
@@ -112,6 +118,7 @@ public class RestProducto {
 	}
 	
 	//BUSCAR POR NOMBRE PRODUCTOS
+	
 	@GetMapping("/buscarporPrecioProducto/{p1}/{p2}")
 	public List<Producto> buscarporPrecioProducto(@PathVariable(value = "p1") double p1, @PathVariable(value="p2") double p2){
 		List<Producto> productos;
@@ -123,6 +130,7 @@ public class RestProducto {
 		return productos;
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/buscarProducto/{codigo}")
 	public Producto buscarProductoC(@PathVariable(value="codigo")Long codigo) {
 		Producto p;
@@ -137,8 +145,9 @@ public class RestProducto {
 		return p;
 	}
 	
-	
+	 
 	//Subir Imagen para el create
+	     @Secured("ROLE_ADMIN")
 		@PostMapping("/producto/uploadC")
 		public ResponseEntity<?> uploadCreate(@RequestParam("archivo") MultipartFile archivo, @RequestParam("producto") Producto producto){
 			Map<String, Object> response=new HashMap<>();
@@ -176,6 +185,7 @@ public class RestProducto {
 		}
 	
 	//Subir Imagen
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/producto/upload")
 	public ResponseEntity<?> upload(@RequestParam("archivo") MultipartFile archivo, @RequestParam("id") Long id){
 		Map<String, Object> response=new HashMap<>();
@@ -224,7 +234,7 @@ public class RestProducto {
 		
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/uploads/img/{nombreimg:.+}")
 	public ResponseEntity<Resource> verImagen(@PathVariable("nombreimg") String nombreImg){
 		Path ruta = Paths.get("uploads").resolve(nombreImg).toAbsolutePath();

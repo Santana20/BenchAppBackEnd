@@ -33,10 +33,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import pe.upc.bench.entidades.Cliente2;
+import pe.upc.bench.entidades.Producto;
 import pe.upc.bench.entidades.Region;
 import pe.upc.bench.entidades.Usuario;
 import pe.upc.bench.servicios.IClienteService;
 import pe.upc.bench.servicios.IUploadFileService;
+import pe.upc.bench.servicios.ServicioProducto;
 import pe.upc.bench.servicios.UsuarioService;
 import pe.upc.bench.servicios.UsuarioServiceDatos;
 
@@ -54,6 +56,8 @@ public class ClienteRestController {
 	@Autowired
 	private UsuarioServiceDatos usuarioServiceDatos;
 	
+	
+	
 	//Registrar Usuario
 	@PostMapping("/RegistrarUsuario")
 	public Usuario registrarUsuario(@RequestBody Usuario usuario) {
@@ -68,6 +72,8 @@ public class ClienteRestController {
 	public List<Cliente2> index() {
 		return clienteService.findAll();
 	}
+	
+	
 	
 	@GetMapping("/clientes/page/{page}")
 	public Page<Cliente2> index(@PathVariable Integer page) {
