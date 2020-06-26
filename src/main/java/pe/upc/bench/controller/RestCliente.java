@@ -20,7 +20,7 @@ import pe.upc.bench.servicios.ServicioCliente;
 @RestController
 @RequestMapping("/api")
 public class RestCliente {
-
+ /*
 	@Autowired
 	private ServicioCliente serviciocliente;
 	
@@ -97,6 +97,6 @@ public class RestCliente {
 		}
 		return client;
 	}
-	
+	*/
 	
 }
