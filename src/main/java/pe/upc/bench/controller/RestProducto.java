@@ -92,7 +92,7 @@ public class RestProducto {
 	}
 	
 	//MOSTRAR PRODUCTOS
-	@Secured({"ROLE_ADMIN", "ROLE_USER"})
+	//@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@GetMapping("/mostrarProductos")
 	public List<Producto> mostrarProductos(){
 		List<Producto> productos;

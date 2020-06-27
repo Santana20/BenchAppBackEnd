@@ -56,15 +56,12 @@ public class ClienteRestController {
 	@Autowired
 	private UsuarioServiceDatos usuarioServiceDatos;
 	
-	
-	
-	//Registrar Usuario
+	//REGISTRAR USUARIO
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/RegistrarUsuario")
 	public Usuario registrarUsuario(@RequestBody Usuario usuario) {
 		return usuarioServiceDatos.registrar(usuario);
 	}
-	
-	
 	
 	// private final Logger log = LoggerFactory.getLogger(ClienteRestController.class);
 
