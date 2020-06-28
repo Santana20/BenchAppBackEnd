@@ -1,6 +1,7 @@
 package pe.upc.bench.entidades;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -38,16 +39,25 @@ public class Usuario implements Serializable{
 	
 	@Column(unique = true)
 	private String email;
-
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name="usuarios_roles", joinColumns= @JoinColumn(name="usuario_id"),
-	inverseJoinColumns=@JoinColumn(name="role_id"),
-	uniqueConstraints= {@UniqueConstraint(columnNames= {"usuario_id", "role_id"})})
+	
+	@ManyToMany(fetch = FetchType.EAGER) //cascade all queria hacer insert o lazy una de dos....lazy es en memoria y eager es directo, que más necesitas???
+	@JoinTable(name="usuarios_roles",
+	joinColumns= @JoinColumn(name="usuario_id", nullable = false),
+	inverseJoinColumns=@JoinColumn(name="role_id", nullable = false)
+	,	uniqueConstraints= {@UniqueConstraint(columnNames= {"usuario_id", "role_id"})})
 	private List<Role> roles;
 
 	public Long getId() {
 		return id;
 	}
+	
+	// Metodo para agregar perfiles
+		public void agregar(Role rol) {
+			if (roles == null) {
+				roles = new LinkedList<>();
+			}
+			roles.add(rol);
+		}
 
 	public void setId(Long id) {
 		this.id = id;

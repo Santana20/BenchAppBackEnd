@@ -35,6 +35,7 @@ import org.springframework.web.multipart.MultipartFile;
 import pe.upc.bench.entidades.Cliente2;
 import pe.upc.bench.entidades.Producto;
 import pe.upc.bench.entidades.Region;
+import pe.upc.bench.entidades.Role;
 import pe.upc.bench.entidades.Usuario;
 import pe.upc.bench.servicios.IClienteService;
 import pe.upc.bench.servicios.IUploadFileService;
