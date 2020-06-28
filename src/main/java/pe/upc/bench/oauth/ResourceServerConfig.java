@@ -20,7 +20,8 @@ import org.springframework.web.filter.CorsFilter;
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Override ///Reglas de seguridad de nuestros EndPoints
 	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/mostrarProductos","/api/RegistrarUsuario","/api/buscarporPrecioProducto/**","/api/buscarNombreProducto/**", "/api/clientes", "/api/clientes/page/**", "/api/uploads/img/**", "/images/**").permitAll()
+		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/mostrarProductos","/api/RegistrarUsuario","/api/buscarporPrecioProducto/**","/api/buscarNombreProducto/**", "/api/clientes", "/api/clientes/page/**", "/api/uploads/img/**", "/images/**").permitAll();
+		http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/RegistrarUsuario").permitAll()
 		/*.antMatchers(HttpMethod.GET, "/api/clientes/{id}").hasAnyRole("USER", "ADMIN")//no es necesario el prefijo ROLE_
 		.antMatchers(HttpMethod.POST, "/api/clientes/upload").hasAnyRole("USER", "ADMIN") // de lo especifico a los genericos
 		.antMatchers(HttpMethod.POST, "/api/clientes").hasRole("ADMIN")

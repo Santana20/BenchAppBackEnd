@@ -57,7 +57,7 @@ public class ClienteRestController {
 	private UsuarioServiceDatos usuarioServiceDatos;
 	
 	//REGISTRAR USUARIO
-	@Secured("ROLE_ADMIN")
+	
 	@PostMapping("/RegistrarUsuario")
 	public Usuario registrarUsuario(@RequestBody Usuario usuario) {
 		return usuarioServiceDatos.registrar(usuario);
