@@ -35,10 +35,12 @@ public class UsuarioServiceDatos {
 	//REGISTRAR USUARIO
 	@Transactional
 	public Usuario registrarAdmin(Usuario usuario) {
-		Role role=new Role();
-		role.setId(1L);
-		role.setId(2L);
-		usuario.agregar(role);
+		Role role1=new Role();
+		Role role2=new Role();
+		role1.setId(1L);
+		role2.setId(2L);
+		usuario.agregar(role1);
+		usuario.agregar(role2);
 		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 		return usuarioDao.save(usuario);
 	}
