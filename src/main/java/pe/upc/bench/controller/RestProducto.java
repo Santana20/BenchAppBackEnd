@@ -68,7 +68,7 @@ public class RestProducto {
 	
 	
 	//ELIMINAR PRODUCTO
-	@Secured("ROLE_ADMIN")
+	
 	@DeleteMapping("/eliminarProducto/{codigo}")
 	public Producto eliminarProducto(@PathVariable(value = "codigo") Long codigo) {
 		Producto p;
@@ -130,7 +130,7 @@ public class RestProducto {
 		return productos;
 	}
 	
-	@Secured("ROLE_ADMIN")
+	
 	@GetMapping("/buscarProducto/{codigo}")
 	public Producto buscarProductoC(@PathVariable(value="codigo")Long codigo) {
 		Producto p;

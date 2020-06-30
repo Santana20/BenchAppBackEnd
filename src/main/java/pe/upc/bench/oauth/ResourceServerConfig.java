@@ -23,8 +23,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/mostrarProductos","/api/RegistrarUsuario","/api/buscarporPrecioProducto/**","/api/buscarNombreProducto/**"
 				, "/api/clientes", "/api/clientes/page/**", "/api/uploads/img/**", "/images/**",
 				"/api/buscarofertaTitulo/**","/api/ofertas",
-				"/api/pizzeriamostrar","/api/mostrarProductoOferta","/api/reviews","/api/uploads/img/**").permitAll();
-		http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/RegistrarUsuario","/api/registrarReview","/api/producto/**","/api/producto/upload","/api/producto/uploadC").permitAll()
+				"/api/pizzeriamostrar","/api/mostrarProductoOferta","/api/reviews","/api/uploads/img/**",
+				"/api/buscarProducto/").permitAll();
+		http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/RegistrarUsuario","/api/registrarReview","/api/producto/**","/api/producto/upload","/api/producto/uploadC",
+				"/api/RegistrarPO/**/**").permitAll();
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/api/eliminarProducto/**").permitAll()
 		/*.antMatchers(HttpMethod.GET, "/api/clientes/{id}").hasAnyRole("USER", "ADMIN")//no es necesario el pr
 		.antMatchers(HttpMethod.POST, "/api/clientes/upload").hasAnyRole("USER", "ADMIN") // de lo especifico a los genericos
 		.antMatchers(HttpMethod.POST, "/api/clientes").hasRole("ADMIN")

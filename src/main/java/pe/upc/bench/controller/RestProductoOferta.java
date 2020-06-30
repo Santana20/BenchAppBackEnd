@@ -26,7 +26,7 @@ public class RestProductoOferta {
 	private ServicioProductoOferta servicioproductooferta;
 	
 	//REGISTRAR PRODUCTO OFERTA
-	@Secured("ROLE_ADMIN")
+	
 	@PostMapping("/RegistrarPO/{codigo}/{codigo2}")
 	public Producto_Oferta registrarProductoOferta(@PathVariable(value = "codigo") Long codigo,@PathVariable(value = "codigo2") Long codigo2,@RequestBody Producto_Oferta producto_Oferta) {
 		Producto_Oferta po;

@@ -25,7 +25,7 @@ public class RestReview {
 	private ServicioReview servicioreview;
 	
 	//REGISTRAR REVIEWwww
-	
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@PostMapping("/registrarReview")
 	public Review registrarReview(@RequestBody Review review) {
 		Review r;
