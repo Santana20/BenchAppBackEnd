@@ -234,7 +234,7 @@ public class RestProducto {
 		
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
-	@Secured("ROLE_ADMIN")
+	
 	@GetMapping("/uploads/img/{nombreimg:.+}")
 	public ResponseEntity<Resource> verImagen(@PathVariable("nombreimg") String nombreImg){
 		Path ruta = Paths.get("uploads").resolve(nombreImg).toAbsolutePath();
