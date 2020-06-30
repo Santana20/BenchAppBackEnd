@@ -63,6 +63,11 @@ public class ClienteRestController {
 		return usuarioServiceDatos.registrar(usuario);
 	}
 	
+	//REGISTRAR ADMIN
+	@PostMapping("/RegistrarAdmin")
+	public Usuario registrarAdmin(@RequestBody Usuario usuario) {
+		return usuarioServiceDatos.registrarAdmin(usuario);
+	}
 	//RETORNAR USUARIO POR USERNAME
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@GetMapping("/retonarUsuario/{username}")

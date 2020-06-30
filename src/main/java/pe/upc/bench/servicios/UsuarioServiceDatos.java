@@ -32,6 +32,16 @@ public class UsuarioServiceDatos {
 		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 		return usuarioDao.save(usuario);
 	}
+	//REGISTRAR USUARIO
+	@Transactional
+	public Usuario registrarAdmin(Usuario usuario) {
+		Role role=new Role();
+		role.setId(1L);
+		role.setId(2L);
+		usuario.agregar(role);
+		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+		return usuarioDao.save(usuario);
+	}
 	
 	//OBTENER UN SOLO USUARIO
 			public Usuario obtenerUsuario(Long id ) throws Exception {

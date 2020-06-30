@@ -24,12 +24,12 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 				, "/api/clientes", "/api/clientes/page/**", "/api/uploads/img/**", "/images/**",
 				"/api/buscarofertaTitulo/**","/api/ofertas",
 				"/api/pizzeriamostrar","/api/mostrarProductoOferta","/api/reviews").permitAll();
-		http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/RegistrarUsuario").permitAll()
+		http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/RegistrarUsuario","/api/registrarReview","/api/RegistrarAdmin").permitAll()
 		/*.antMatchers(HttpMethod.GET, "/api/clientes/{id}").hasAnyRole("USER", "ADMIN")//no es necesario el pr
 		.antMatchers(HttpMethod.POST, "/api/clientes/upload").hasAnyRole("USER", "ADMIN") // de lo especifico a los genericos
 		.antMatchers(HttpMethod.POST, "/api/clientes").hasRole("ADMIN")
 		.antMatchers("/api/clientes/**").hasRole("ADMIN")*/
-		.antMatchers(HttpMethod.POST, "/api/registrarReview").hasRole("ADMIN")
+		
 		.anyRequest().authenticated()
 		.and().cors().configurationSource(corsConfigurationSource());
 	}
