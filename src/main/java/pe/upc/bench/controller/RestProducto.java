@@ -41,7 +41,7 @@ public class RestProducto {
 	private ServicioProducto servicioproducto;
 	
 	//REGISTRAR PRODUCTO
-	@Secured("ROLE_ADMIN")
+	
 	@PostMapping("/producto/{codigo}")
 	public Producto registrarProducto(@PathVariable(value = "codigo") Long codigo,@RequestBody Producto producto) {
 		Producto p;
@@ -147,7 +147,7 @@ public class RestProducto {
 	
 	 
 	//Subir Imagen para el create
-	     @Secured("ROLE_ADMIN")
+	     
 		@PostMapping("/producto/uploadC")
 		public ResponseEntity<?> uploadCreate(@RequestParam("archivo") MultipartFile archivo, @RequestParam("producto") Producto producto){
 			Map<String, Object> response=new HashMap<>();
@@ -185,7 +185,7 @@ public class RestProducto {
 		}
 	
 	//Subir Imagen
-	@Secured("ROLE_ADMIN")
+	
 	@PostMapping("/producto/upload")
 	public ResponseEntity<?> upload(@RequestParam("archivo") MultipartFile archivo, @RequestParam("id") Long id){
 		Map<String, Object> response=new HashMap<>();
