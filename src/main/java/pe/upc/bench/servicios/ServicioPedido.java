@@ -30,9 +30,9 @@ public class ServicioPedido {
 	//REALIZAR UN PEDIDO
 	
 	@Transactional(noRollbackFor =  Exception.class)
-	public Pedido realizarPedido(Long id,Pedido pedido) throws Exception {
+	public Pedido realizarPedido(String username,Pedido pedido) throws Exception {
 		Usuario c = null;
-		c=usuarioDao.buscarUsuario(id);
+		c=usuarioDao.retornaUsuarioUserName(username);
 		if(c==null) throw new Exception("entidad no encontrada");
 		for(Pedido_Producto aux : pedido.getProductos())
 		{
@@ -57,15 +57,15 @@ public class ServicioPedido {
 	}
 	
 	//LISTAR PEDIDOS ACTIVOS POR CLIENTE
-	public List<Pedido> listarPedidosActivosdeCliente(Long codigo) throws Exception
+	public List<Pedido> listarPedidosActivosdeCliente(String username) throws Exception
 	{
-		return (List<Pedido>) repositorioPedido.listarPedidosActivosdeCliente(codigo);
+		return (List<Pedido>) repositorioPedido.listarPedidosActivosdeCliente(username);
 	}
 	
 	//LISTAR PEDIDOS ANTIGUOS POR CLIENTE
-	public List<Pedido> listarPedidosPasadosdeCliente(Long codigo) throws Exception
+	public List<Pedido> listarPedidosPasadosdeCliente(String username) throws Exception
 	{
-		return (List<Pedido>) repositorioPedido.listarPedidosPasadosdeCliente(codigo);
+		return (List<Pedido>) repositorioPedido.listarPedidosPasadosdeCliente(username);
 	}
 	
 	

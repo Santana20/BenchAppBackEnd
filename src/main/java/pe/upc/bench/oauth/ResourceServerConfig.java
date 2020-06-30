@@ -29,6 +29,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		.antMatchers(HttpMethod.POST, "/api/clientes/upload").hasAnyRole("USER", "ADMIN") // de lo especifico a los genericos
 		.antMatchers(HttpMethod.POST, "/api/clientes").hasRole("ADMIN")
 		.antMatchers("/api/clientes/**").hasRole("ADMIN")*/
+		.antMatchers(HttpMethod.POST, "/api/registrarReview").hasRole("ADMIN")
 		.anyRequest().authenticated()
 		.and().cors().configurationSource(corsConfigurationSource());
 	}

@@ -26,11 +26,11 @@ public class RestPedido {
 	
 	//REGISTRAR PEDIDO
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
-	@PostMapping("/pedido/{id}")
-	public Pedido registrarPedido(@PathVariable(value = "id") Long id, @RequestBody Pedido pedido) {
+	@PostMapping("/pedido/{username}")
+	public Pedido registrarPedido(@PathVariable(value = "username") String username, @RequestBody Pedido pedido) {
 		Pedido p;
 		try {
-			p=serviciopedido.realizarPedido(id, pedido);
+			p=serviciopedido.realizarPedido(username, pedido);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No es posible realizar el Pedido");
@@ -71,12 +71,12 @@ public class RestPedido {
 	
 	//LISTAR PEDIDOS ACTIVOS POR CLIENTE
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
-	@GetMapping("/listarPedidosActivosdeCliente/{codigo}")
-	public List<Pedido> listarPedidosActivosdeCliente(@PathVariable(value="codigo") Long codigo)
+	@GetMapping("/listarPedidosActivosdeCliente/{username}")
+	public List<Pedido> listarPedidosActivosdeCliente(@PathVariable(value="username") String username)
 	{
 		List<Pedido> pedidos=null;
 		try {
-			pedidos=serviciopedido.listarPedidosActivosdeCliente(codigo);
+			pedidos=serviciopedido.listarPedidosActivosdeCliente(username);
 		}catch(Exception e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No se encontraron Pedidos");
 		}
@@ -85,12 +85,12 @@ public class RestPedido {
 	
 	//LISTAR PEDIDOS ANTIGUOS POR CLIENTE
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
-	@GetMapping("/listarPedidosPasadosdeCliente/{codigo}")
-	public List<Pedido> listarPedidosPasadosdeCliente(@PathVariable(value="codigo") Long codigo)
+	@GetMapping("/listarPedidosPasadosdeCliente/{username}")
+	public List<Pedido> listarPedidosPasadosdeCliente(@PathVariable(value="username") String username)
 	{
 		List<Pedido> pedidos=null;
 		try {
-			pedidos=serviciopedido.listarPedidosPasadosdeCliente(codigo);
+			pedidos=serviciopedido.listarPedidosPasadosdeCliente(username);
 		}catch(Exception e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No se encontraron Pedidos");
 		}
