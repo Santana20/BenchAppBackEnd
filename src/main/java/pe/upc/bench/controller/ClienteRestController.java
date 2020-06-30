@@ -63,6 +63,19 @@ public class ClienteRestController {
 		return usuarioServiceDatos.registrar(usuario);
 	}
 	
+	//RETORNAR USUARIO POR USERNAME
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
+	@GetMapping("/retonarUsuario/{username}")
+	public Usuario retonarUsuario(@PathVariable(value = "username")String username) {
+		Usuario c=null;
+		try {
+			c=usuarioServiceDatos.retornarUsuario(username);
+		} catch (Exception e) {
+			
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+		}
+		return c;
+	}
 	
 	//OBTENER UN USUARIO
 	    @Secured("ROLE_ADMIN")

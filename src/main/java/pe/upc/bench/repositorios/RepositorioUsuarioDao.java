@@ -22,5 +22,8 @@ public Usuario findByUsername(String username);
 	
 	@Query("select u from Usuario u where u.nombre like ?1%")
 	List<Usuario> buscarNombre(String nombre);
+	
+	@Query("select u from Usuario u where u.username=:username")
+	public Usuario retornaUsuarioUserName(@Param("username") String username);
 
 }

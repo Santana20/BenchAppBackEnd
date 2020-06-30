@@ -42,7 +42,13 @@ public class UsuarioServiceDatos {
 				
 			}
 			
-			
+			//RETORNAR USUARIO POR USERNAME
+			public Usuario retornarUsuario(String username) throws Exception {
+				Usuario c;
+				c=usuarioDao.retornaUsuarioUserName(username);
+				if(c==null) throw new Exception("entidad no encontrada");
+				return c;
+			}
 			
 			
 			
