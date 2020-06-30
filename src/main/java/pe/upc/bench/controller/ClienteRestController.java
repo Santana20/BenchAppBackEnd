@@ -64,6 +64,7 @@ public class ClienteRestController {
 	}
 	
 	//REGISTRAR ADMIN
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/RegistrarAdmin")
 	public Usuario registrarAdmin(@RequestBody Usuario usuario) {
 		return usuarioServiceDatos.registrarAdmin(usuario);
