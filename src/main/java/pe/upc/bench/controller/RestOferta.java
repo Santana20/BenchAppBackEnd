@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ public class RestOferta {
 	private ServicioOferta serviciooferta;
 	
 	//REGISTRAR OFERTA
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/oferta/{codigo}")
 	public Oferta registrarOferta(@PathVariable(value = "codigo") Long codigo, @RequestBody Oferta oferta) {
 		Oferta o;
@@ -35,6 +37,7 @@ public class RestOferta {
 	}
 	
 	//ACTUALIZAR OFERTA
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/actualizarOferta/{codigo}")
 	public Oferta actualizarOferta(@RequestBody Oferta oferta,@PathVariable(value = "codigo")Long codigo) {
 		Oferta o;
@@ -47,6 +50,7 @@ public class RestOferta {
 	}
 	
 	//ELIMINAR OFERTA
+	@Secured("ROLE_ADMIN")
 	@DeleteMapping("/eliminaroferta/{codigo}")
 	public Oferta eliminarOferta(@PathVariable(value = "codigo")Long codigo) {
 		Oferta o;
@@ -58,7 +62,8 @@ public class RestOferta {
 		return o;
 	}
 	
-	//OBTENER OFERTA 
+	//OBTENER OFERTA
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/oferta/{codigo}")
 	public Oferta obtenerOferta(@PathVariable(value = "codigo")Long codigo) {
 		Oferta o=null;

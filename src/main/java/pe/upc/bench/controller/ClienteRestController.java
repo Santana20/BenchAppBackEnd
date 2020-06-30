@@ -31,13 +31,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
-import pe.upc.bench.entidades.Cliente2;
 import pe.upc.bench.entidades.Producto;
-import pe.upc.bench.entidades.Region;
+
 import pe.upc.bench.entidades.Role;
 import pe.upc.bench.entidades.Usuario;
-import pe.upc.bench.servicios.IClienteService;
+
 import pe.upc.bench.servicios.IUploadFileService;
 import pe.upc.bench.servicios.ServicioProducto;
 import pe.upc.bench.servicios.UsuarioService;
@@ -48,8 +48,7 @@ import pe.upc.bench.servicios.UsuarioServiceDatos;
 @RestController
 @RequestMapping("/api")
 public class ClienteRestController {
-	@Autowired
-	private IClienteService clienteService;
+	
 	
 	@Autowired
 	private IUploadFileService uploadService;
@@ -64,8 +63,76 @@ public class ClienteRestController {
 		return usuarioServiceDatos.registrar(usuario);
 	}
 	
+	
+	//OBTENER UN USUARIO
+	    @Secured("ROLE_ADMIN")
+		@GetMapping("/cliente/{id}")
+		public Usuario obtenerCliente(@PathVariable(value = "dni") Long id) {
+			Usuario c=null;
+			try {
+				c=usuarioServiceDatos.obtenerUsuario(id);
+			} catch (Exception e) {
+				
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+			}
+			return c;
+		}
+		
+		//OBTENER LISTA USUARIOS
+	    @Secured("ROLE_ADMIN")
+		@GetMapping("/clientes")
+		public List<Usuario> obtenerClientes(){
+			List<Usuario> c;
+			try {
+				c=usuarioServiceDatos.obtenerUsuarios();
+			} catch (Exception e) {
+				
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No se encontraron Clientes");
+			}
+			return c;
+		}
+		
+		
+		//ELIMINAR USUARIOS
+	    @Secured("ROLE_ADMIN")
+		@DeleteMapping("/borrar/{id}")
+		public Usuario borrarCliente(@PathVariable(value = "dni") Long id) {
+			Usuario c;
+			try {
+				c=usuarioServiceDatos.borrarCliente(id);
+			}catch(Exception e) {
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND,"no se puede borrar");
+			}
+			return c;
+		}
+		
+		//ACTUALIZAR CLIENTE
+	    @Secured("ROLE_ADMIN")
+		@PutMapping("/actualizarCliente/{id}")
+		public Usuario actualizarCliente(@RequestBody Usuario cliente,@PathVariable(value = "id") Long id) {
+			Usuario client=null;
+			try {
+				client=usuarioServiceDatos.actualizarCliente(cliente, id);
+			}catch(Exception e) {
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND,"no es posible actualizar");
+			}
+			return client;
+		}
+		//BUSCAR POR NOMBRE USUARIOS
+	    @Secured("ROLE_ADMIN")
+		@GetMapping("/buscarNombre/{nombre}")
+		public List<Usuario> buscarNombreClientes(@PathVariable(value = "nombre") String nombre){
+			List<Usuario> client =null;
+			try {
+				client=usuarioServiceDatos.buscarNombre(nombre);
+			}catch(Exception e) {
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+			}
+			return client;
+		}
+	
 	// private final Logger log = LoggerFactory.getLogger(ClienteRestController.class);
-
+     /*
 	@GetMapping("/clientes")
 	public List<Cliente2> index() {
 		return clienteService.findAll();
@@ -261,6 +328,6 @@ public class ClienteRestController {
 	@GetMapping("/clientes/regiones")
 	public List<Region> listarRegiones(){
 		return clienteService.findAllRegiones();
-	}
+	}*/
 
 }

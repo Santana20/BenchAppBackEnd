@@ -5,19 +5,21 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pe.upc.bench.entidades.Cliente;
+
 import pe.upc.bench.entidades.Review;
-import pe.upc.bench.repositorios.RepositorioCliente;
+
 import pe.upc.bench.repositorios.RepositorioReview;
+import pe.upc.bench.repositorios.RepositorioUsuarioDao;
 
 @Service
 public class ServicioReview {
 	@Autowired
 	private RepositorioReview repositorioreview;
 	
-	@Autowired
-	private RepositorioCliente repositoriocliente;
 	
+	
+	@Autowired
+	private RepositorioUsuarioDao usuarioDao;
 	
 	//REGISTRAR REVIEW
 	public Review registrarReview(Review review) {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ public class RestProductoPedido {
 	private ServicioProductoPedido servicioproductopedido;
 	
 	//REGISTRAR PEDIDO PRODUCTO
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@PostMapping("/RegistrarPP/{codigo}")
 	public Pedido_Producto registrarPedidoProducto(@PathVariable(value = "codigo") Long codigo,@RequestBody Pedido_Producto pedido_Producto) {
 		Pedido_Producto pp;
@@ -35,6 +37,7 @@ public class RestProductoPedido {
 	}
 	
 	//MOSTRAR PEDIDOS
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@GetMapping("/pedidosProductos")
 	public List<Pedido_Producto> listaPedidos(){
 		List<Pedido_Producto> pp;
@@ -47,6 +50,7 @@ public class RestProductoPedido {
 	}
 	
 	//OBTENER DETALLE PEDIDO
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@GetMapping("/otenerPedidoProducto/{codigo}")
 	public List<Pedido_Producto> obtenerPeddidoPro(@PathVariable(value = "codigo")Long codigo) {
 		List<Pedido_Producto> pp;

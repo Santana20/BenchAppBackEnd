@@ -36,14 +36,14 @@ public class Pedido  {
 	private double costo_total;
 	
 	
-	@ManyToOne
-	@JoinColumn(name ="ID_CLIENTE")
-	
-	private Cliente cliente;
 	
 	@OneToMany(mappedBy = "pedido",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Pedido_Producto> productos;
 	
+	@ManyToOne
+	@JoinColumn(name="ID_USUARIO")
+	
+	private Usuario usuario;
 	
 	
 	public Long getCodigo() {
@@ -59,12 +59,7 @@ public class Pedido  {
 		this.direccion = direccion;
 	}
 	
-	public Cliente getCliente() {
-		return cliente;
-	}
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
+	
 	public double getCosto_total() {
 		return costo_total;
 	}
@@ -96,5 +91,13 @@ public class Pedido  {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
+	
 	
 }

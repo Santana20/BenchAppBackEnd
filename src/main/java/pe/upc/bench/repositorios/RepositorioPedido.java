@@ -17,11 +17,11 @@ public interface RepositorioPedido extends JpaRepository<Pedido, Long>{
 	@Query("select c from Pedido c where c.costo_total between :ini and :fin")
 	List<Pedido> buscarRangocCosto(@Param("ini") double ini,@Param("fin") double fin);
 	
-	@Query("SELECT c FROM Pedido c WHERE c.cliente.codigo=:codigo and c.status=0")
-	List<Pedido> listarPedidosActivosdeCliente(@Param("codigo") Long codigo);
+	@Query("SELECT c FROM Pedido c WHERE c.usuario.id=:id and c.status=0")
+	List<Pedido> listarPedidosActivosdeCliente(@Param("id") Long id);
 	
-	@Query("SELECT c FROM Pedido c WHERE c.cliente.codigo=:codigo and c.status=1")
-	List<Pedido> listarPedidosPasadosdeCliente(@Param("codigo") Long codigo);
+	@Query("SELECT c FROM Pedido c WHERE c.usuario.id=:id and c.status=1")
+	List<Pedido> listarPedidosPasadosdeCliente(@Param("id") Long id);
 	
 	@Query("SELECT c FROM Pedido c WHERE c.status=0")
 	List<Pedido> listarPedidosActivos();

@@ -9,31 +9,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pe.upc.bench.entidades.Cliente;
+
 import pe.upc.bench.entidades.Pedido;
 import pe.upc.bench.entidades.Pedido_Producto;
-import pe.upc.bench.repositorios.RepositorioCliente;
+import pe.upc.bench.entidades.Usuario;
+
 import pe.upc.bench.repositorios.RepositorioPedido;
+import pe.upc.bench.repositorios.RepositorioUsuarioDao;
 
 @Service
 public class ServicioPedido {
+	
+	
 	@Autowired
-	private RepositorioCliente repositorioCliente;
+	private RepositorioUsuarioDao usuarioDao;
 	
 	@Autowired
 	private RepositorioPedido repositorioPedido;
 	
 	//REALIZAR UN PEDIDO
+	
 	@Transactional(noRollbackFor =  Exception.class)
-	public Pedido realizarPedido(String dni,Pedido pedido) throws Exception {
-		Cliente c = null;
-		c=repositorioCliente.buscarCliente(dni);
+	public Pedido realizarPedido(Long id,Pedido pedido) throws Exception {
+		Usuario c = null;
+		c=usuarioDao.buscarUsuario(id);
 		if(c==null) throw new Exception("entidad no encontrada");
 		for(Pedido_Producto aux : pedido.getProductos())
 		{
 			aux.setPedido(pedido);
 		}
-		pedido.setCliente(c);
+		pedido.setUsuario(c);
 		return repositorioPedido.save(pedido);
 	}
 	

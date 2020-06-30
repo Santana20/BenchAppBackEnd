@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,11 +25,12 @@ public class RestPedido {
 	private ServicioPedido serviciopedido;
 	
 	//REGISTRAR PEDIDO
-	@PostMapping("/pedido/{dni}")
-	public Pedido registrarPedido(@PathVariable(value = "dni") String dni, @RequestBody Pedido pedido) {
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
+	@PostMapping("/pedido/{id}")
+	public Pedido registrarPedido(@PathVariable(value = "id") Long id, @RequestBody Pedido pedido) {
 		Pedido p;
 		try {
-			p=serviciopedido.realizarPedido(dni, pedido);
+			p=serviciopedido.realizarPedido(id, pedido);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No es posible realizar el Pedido");
@@ -38,6 +40,7 @@ public class RestPedido {
 	}
 	
 	//ACTUALIZAMOS FECHARECEPCIONP DEL PEDIDO
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@PutMapping("/actualizarPedido/{codigo}")
 	public Pedido actualizarFechaRecepcion(@PathVariable(value="codigo")Long codigo, @RequestBody Date fechaRecepcion)
 	{
@@ -53,6 +56,7 @@ public class RestPedido {
 	}
 	
 	//BUSCAR PEDIDO
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@GetMapping("/pedido/{codigo}")
 	public Pedido obtenerPedido(@PathVariable(value = "codigo") Long codigo) {
 		Pedido p=null;
@@ -66,6 +70,7 @@ public class RestPedido {
 	}
 	
 	//LISTAR PEDIDOS ACTIVOS POR CLIENTE
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@GetMapping("/listarPedidosActivosdeCliente/{codigo}")
 	public List<Pedido> listarPedidosActivosdeCliente(@PathVariable(value="codigo") Long codigo)
 	{
@@ -79,6 +84,7 @@ public class RestPedido {
 	}
 	
 	//LISTAR PEDIDOS ANTIGUOS POR CLIENTE
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@GetMapping("/listarPedidosPasadosdeCliente/{codigo}")
 	public List<Pedido> listarPedidosPasadosdeCliente(@PathVariable(value="codigo") Long codigo)
 	{
@@ -92,6 +98,7 @@ public class RestPedido {
 	}
 	
 	//LISTAR TODOS LOS PEDIDOS ACTIVOS
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@GetMapping("/listarPedidosActivos")
 	public List<Pedido> listarPedidosActivos()
 	{
@@ -105,6 +112,7 @@ public class RestPedido {
 	}
 	
 	//LISTAR TODOS LOS PEDIDOS PASADOS
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@GetMapping("/listarPedidosPasados")
 	public List<Pedido> listarPedidosPasados()
 	{
@@ -119,6 +127,7 @@ public class RestPedido {
 	
 	
 	//OBTENER TODOS LOS PEDIDOS
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/pedidos")
 	public List<Pedido> listaPedidos(){
 		List<Pedido> pedidos=null;
@@ -132,6 +141,7 @@ public class RestPedido {
 	
 	
 	//OBTENER PEDIDOS RANGO PRECIOS
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/pedidosRango/{ini}/{fin}")
 	public List<Pedido> rangoPreciosPedidos(@PathVariable(value = "ini") double ini,@PathVariable(value = "fin") double fin){
 		List<Pedido> pedidos=null;

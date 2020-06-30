@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ public class RestPizzeria {
 	private ServicioPizzeria serviciopizzeria;
 	
 	//REGISTRAR PIZZERIA 
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/pizzeria")
 	public Pizzeria registrarPizzeria(@RequestBody Pizzeria pizzeria) {
 		Pizzeria p;
@@ -34,6 +36,7 @@ public class RestPizzeria {
 	}
 	
 	//ACTUALIZAR DATOS DE LA PIZZERIA
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/actualizarPizzeria/{codigo}")
 	public Pizzeria actualizarPizzeria(@RequestBody Pizzeria pizzeria,@PathVariable(value = "codigo") Long codigo) {
 		Pizzeria p;

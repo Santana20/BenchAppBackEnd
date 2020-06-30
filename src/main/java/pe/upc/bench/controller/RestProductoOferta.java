@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ public class RestProductoOferta {
 	private ServicioProductoOferta servicioproductooferta;
 	
 	//REGISTRAR PRODUCTO OFERTA
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/RegistrarPO/{codigo}/{codigo2}")
 	public Producto_Oferta registrarProductoOferta(@PathVariable(value = "codigo") Long codigo,@PathVariable(value = "codigo2") Long codigo2,@RequestBody Producto_Oferta producto_Oferta) {
 		Producto_Oferta po;
@@ -53,6 +55,7 @@ public class RestProductoOferta {
 	
 	
 	//buscar mayor
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/buscarRangoFecha/{fecha}/{fechafin}")
 	public List<Producto_Oferta> buscarmayor(@PathVariable(value = "fecha") String fecha,@PathVariable(value = "fechafin") String fechafin){
 		List<Producto_Oferta> po;
@@ -66,6 +69,7 @@ public class RestProductoOferta {
 	
 	
 	//eliminar producto oferta
+	@Secured("ROLE_ADMIN")
 	@DeleteMapping("/eliminarPO/{codigo}")
 	public Producto_Oferta eliminarProductoOferta(@PathVariable(value = "codigo") Long codigo) {
 		Producto_Oferta po;
